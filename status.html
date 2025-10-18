@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Status</title>
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: #dcdcdc;
+    }
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      background: rgba(30, 30, 30, 0.6);
+      padding: 6px 10px;
+      border-radius: 10px;
+      backdrop-filter: blur(6px);
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      background-color: #00ff62;
+      border-radius: 50%;
+      box-shadow: 0 0 6px #00ff62;
+    }
+  </style>
+</head>
+<body>
+  <div class="status">
+    <div class="dot"></div>
+    <span>Active now •</span>
+    <span id="location">Loading...</span>
+  </div>
+
+  <script>
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('location').textContent = data.city || 'Your City';
+      })
+      .catch(() => {
+        document.getElementById('location').textContent = 'Unknown';
+      });
+  </script>
+</body>
+</html>
